@@ -4,7 +4,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 
@@ -32,14 +31,14 @@ func save(ctx context.Context, sym string, input []byte) (resource.Result, error
 	fp := path.Join(sessionDir, "data.txt")
 	if len(input) > 0 {
 		engine.Logg.Debugf("write data %s session %s", input, sessionId)
-		err = ioutil.WriteFile(fp, input, 0600)
+		err = os.WriteFile(fp, input, 0600)
 		if err != nil {
 			return emptyResult, err
 		}
 	}
-	r, err := ioutil.ReadFile(fp)
+	r, err := os.ReadFile(fp)
 	if err != nil {
-		err = ioutil.WriteFile(fp, []byte("(not set)"), 0600)
+		err = os.WriteFile(fp, []byte("(not set)"), 0600)
 		if err != nil {
 			return emptyResult, err
 		}
