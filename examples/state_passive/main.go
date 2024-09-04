@@ -4,15 +4,15 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"path"
 
+	"git.defalsify.org/vise.git/cache"
+	"git.defalsify.org/vise.git/engine"
+	"git.defalsify.org/vise.git/persist"
 	"git.defalsify.org/vise.git/resource"
 	"git.defalsify.org/vise.git/state"
-	"git.defalsify.org/vise.git/engine"
-	"git.defalsify.org/vise.git/cache"
-	"git.defalsify.org/vise.git/persist"
 )
 
 const (
@@ -34,7 +34,7 @@ func (fsd *fsData) peek(ctx context.Context, sym string, input []byte) (resource
 	if err != nil {
 		return res, err
 	}
-	r, err := ioutil.ReadAll(f)
+	r, err :=io.ReadAll(f)
 	if err != nil {
 		return res, err
 	}
