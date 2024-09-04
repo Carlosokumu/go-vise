@@ -4,7 +4,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -60,7 +59,7 @@ func(pr *profileResource) checkEntry() error {
 func(pr profileResource) nameSave(ctx context.Context, sym string, input []byte) (resource.Result, error) {
 	log.Printf("writing name to file")
 	fp := path.Join(scriptDir, "myname.txt")
-	err := ioutil.WriteFile(fp, input, 0600)
+	err := os.WriteFile(fp, input, 0600)
 	if err != nil {
 		return emptyResult, err
 	}
@@ -74,7 +73,7 @@ func(pr profileResource) nameSave(ctx context.Context, sym string, input []byte)
 func(pr profileResource) emailSave(ctx context.Context, sym string, input []byte) (resource.Result, error) {
 	log.Printf("writing email to file")
 	fp := path.Join(scriptDir, "myemail.txt")
-	err := ioutil.WriteFile(fp, input, 0600)
+	err := os.WriteFile(fp, input, 0600)
 	if err != nil {
 		return emptyResult, err
 	}
